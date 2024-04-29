@@ -8,6 +8,7 @@ public class CodeGenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CodeGenApplication.class, args);
+		// Test
 	}
 
 }
