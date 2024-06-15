@@ -1,20 +1,25 @@
 package com.mcode.llp.codeGen.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.mcode.llp.codeGen.models.AppConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.sql.*;
+
+@Service
 public class GenDAO {
-    private static final String URL = "jdbc:postgresql://localhost:5432/mukesh";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "0000";
     private static Connection connection;
+    private final AppConfig appConfig;
+
+    @Autowired
+    public GenDAO(AppConfig appConfig) {
+        this.appConfig = appConfig;
+    }
 
     private Connection createConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                connection = DriverManager.getConnection(appConfig.getDbURL(), appConfig.getDbUSER(), appConfig.getDbPASSWORD());
             } catch (SQLException e) {
                 System.out.println("Connection failure.");
                 e.printStackTrace();
