@@ -24,9 +24,12 @@ public class GenController {
 
         if (isEntityExists) {
             queryManager.createTable(entityName);
+            queryManager.insertTable(entityName, requestBody);
+            queryManager.deleteTable(entityName, requestBody);
             return new ResponseEntity<>(requestBody, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
     }
 }
