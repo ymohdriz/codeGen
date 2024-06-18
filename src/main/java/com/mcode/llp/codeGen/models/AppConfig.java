@@ -1,10 +1,12 @@
 package com.mcode.llp.codeGen.models;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix =  "app.config")
+
 public class AppConfig {
     String dbURL;
     String dbUSER;

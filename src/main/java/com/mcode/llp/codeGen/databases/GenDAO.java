@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 
-
-
 @Service
 public class GenDAO {
     private static Connection connection;
@@ -31,7 +29,7 @@ public class GenDAO {
         return connection;
     }
 
-            public void createTable(String createTableSQL) {
+    public void createTable(String createTableSQL) {
         try (Statement statement = createConnection().createStatement()) {
             statement.execute(createTableSQL);
             System.out.println("Table created successfully.");
@@ -63,6 +61,8 @@ public class GenDAO {
             } else {
                 System.out.println("No data found to delete.");
             }
+            connection.close();
+
         } catch (SQLException e) {
             System.out.println("Error deleting from table.");
             e.printStackTrace();

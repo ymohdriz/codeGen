@@ -40,18 +40,9 @@ public class QueryManager {
         genDAO.insertTable(insertTableSQL);
     }
 
-        public void deleteTable(String entityName, Map<String, Object> requestBody) {
-            // Ensure the ID is present in the request body
-            if (requestBody.containsKey("id")) {
-                Object idValue = requestBody.get("id");
-
+        public void deleteTable(String entityName, String id) {
                 // Form and execute the DELETE SQL query
-                String deleteTableSQL = "DELETE FROM " + entityName + " WHERE id = " + idValue;
+                String deleteTableSQL = "DELETE FROM " + entityName + " WHERE id = " + id;
                 genDAO.deleteTable(deleteTableSQL);
-
-
-            } else {
-                throw new IllegalArgumentException("ID is required to delete a record.");
-            }
         }
 }

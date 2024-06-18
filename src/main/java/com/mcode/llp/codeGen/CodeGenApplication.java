@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfig.class)
+
+
 public class CodeGenApplication {
 
 	public static void main(String[] args) {
