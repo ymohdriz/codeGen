@@ -1,12 +1,12 @@
 package com.mcode.llp.codeGen.validators;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@Service
 public class GenValidator {
 
     public boolean isEntityExists(String entityName) {
