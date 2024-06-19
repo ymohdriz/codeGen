@@ -7,14 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
-
+@RequestMapping
 public class GenController {
 
-    public final GenValidator genValidator;
-    public final QueryManager queryManager;
+    private final GenValidator genValidator;
+    private final QueryManager queryManager;
 
     @Autowired
     public GenController(QueryManager queryManager, GenValidator genValidator) {
@@ -56,5 +57,34 @@ public class GenController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-}
 
+    @GetMapping("/{entityName}/{id}")
+    public ResponseEntity<?> viewDataById(
+            @PathVariable("entityName") String entityName, @PathVariable("id") String id) {
+
+        boolean isEntityExists = genValidator.isEntityExists(entityName);
+
+        if (isEntityExists) {
+            Map<String, Object> data = queryManager.viewDataById(entityName, id);
+            if (data.isEmpty()) {
+                return new ResponseEntity<>("No data found with the given ID.", HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(data, HttpStatus.OK);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{entityName}")
+    public ResponseEntity<?> viewAllData(@PathVariable("entityName") String entityName) {
+        boolean isEntityExists = genValidator.isEntityExists(entityName);
+
+        if (isEntityExists) {
+            List<Map<String, Object>> data = queryManager.viewAllData(entityName);
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+}

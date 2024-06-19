@@ -4,11 +4,12 @@ import com.mcode.llp.codeGen.databases.GenDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class QueryManager {
-    GenDAO genDAO;
+     GenDAO genDAO;
 
     @Autowired
     QueryManager(GenDAO genDAO) {
@@ -21,11 +22,10 @@ public class QueryManager {
                 "id SERIAL PRIMARY KEY, " +
                 "name VARCHAR(100) NOT NULL, " +
                 "dept VARCHAR(100) NOT NULL);";
-
         genDAO.createTable(createTableSQL);
     }
 
-    public void insertTable(String entityName, Map<String, Object> responseBody){
+    public void insertTable(String entityName, Map<String, Object> responseBody) {
         StringBuilder valuesPart = new StringBuilder("(" );
         StringBuilder keysPart = new StringBuilder("(");
         for (Map.Entry<String, Object> entry : responseBody.entrySet()) {
@@ -40,9 +40,21 @@ public class QueryManager {
         genDAO.insertTable(insertTableSQL);
     }
 
-        public void deleteTable(String entityName, String id) {
-                // Form and execute the DELETE SQL query
-                String deleteTableSQL = "DELETE FROM " + entityName + " WHERE id = " + id;
-                genDAO.deleteTable(deleteTableSQL);
-        }
+    public void deleteTable(String entityName, String id) {
+        // Form and execute the DELETE SQL query
+        String deleteTableSQL = "DELETE FROM " + entityName + " WHERE id = " + id;
+        genDAO.deleteTable(deleteTableSQL);
+
+
+    }
+
+    public Map<String, Object> viewDataById(String entityName, String id) {
+        String viewID = "SELECT * FROM " + entityName + " WHERE id = " + id;
+        return genDAO.viewDataById(viewID);
+    }
+
+    public List<Map<String, Object>> viewAllData(String entityName) {
+        String viewData = "SELECT * FROM " + entityName;
+        return genDAO.viewAllData(viewData);
+    }
 }
