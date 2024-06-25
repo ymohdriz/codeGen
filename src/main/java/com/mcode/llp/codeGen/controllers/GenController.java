@@ -1,5 +1,4 @@
 package com.mcode.llp.codeGen.controllers;
-
 import com.mcode.llp.codeGen.managers.QueryManager;
 import com.mcode.llp.codeGen.validators.GenValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping
 public class GenController {
 
     private final GenValidator genValidator;

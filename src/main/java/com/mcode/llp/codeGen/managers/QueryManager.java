@@ -16,6 +16,7 @@ public class QueryManager {
         this.genDAO = genDAO;
     }
 
+
     public void createTable(String entityName) {
         // Form the query using Yasar code
         String createTableSQL = "CREATE TABLE IF NOT EXISTS " + entityName + " (" +
