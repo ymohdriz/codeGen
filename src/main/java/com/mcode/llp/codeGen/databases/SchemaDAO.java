@@ -4,6 +4,7 @@ import com.mcode.llp.codeGen.models.Property;
 import com.mcode.llp.codeGen.models.Schema;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SchemaDAO extends JpaRepository<Property, Long> {
+import java.util.Map;
 
+public interface SchemaDAO extends JpaRepository<Property, Long> {
 }

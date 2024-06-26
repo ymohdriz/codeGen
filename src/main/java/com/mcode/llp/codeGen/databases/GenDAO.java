@@ -112,4 +112,18 @@ public class GenDAO {
         }
         return resultList;
     }
+
+    public void updateTable(String updateSQL)  {
+        try(PreparedStatement preparedStatement = createConnection().prepareStatement(updateSQL)){
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Data Updated from the table successfully.");
+            } else {
+                System.out.println("No data found to upadate.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating from table.");
+            e.printStackTrace();
+        }
+        }
 }
