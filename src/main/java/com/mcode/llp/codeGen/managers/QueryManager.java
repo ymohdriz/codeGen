@@ -19,6 +19,7 @@ public class QueryManager {
 
     public void createTable(String entityName) {
         // Form the query using Yasar code
+        
         String createTableSQL = "CREATE TABLE IF NOT EXISTS " + entityName + " (" +
                 "id SERIAL PRIMARY KEY, " +
                 "name VARCHAR(100) NOT NULL, " +

@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Schema {
-    String title;
+    String entity;
 
     List<Property> properties = new ArrayList<>();
 
     public Schema() {
     }
 
-    public String getTitle() {
-        return title;
+    public String getEntity() {
+        return entity;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEntity(String entity) {
+        this.entity = entity;
     }
 
     public List<Property> getProperties() {
