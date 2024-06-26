@@ -21,7 +21,7 @@ public class GenDAO {
     private Connection createConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection(appConfig.getDbURL(), appConfig.getDbUSER(), appConfig.getDbPASSWORD());
+                connection = DriverManager.getConnection(appConfig.getUrl(), appConfig.getUsername(), appConfig.getPassword());
                 System.out.println("Connection created successfully.");
             } catch (SQLException e) {
                 System.out.println("Connection failure.");
