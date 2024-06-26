@@ -15,7 +15,7 @@ public class SchemaController {
     @PostMapping("/schemas")
     public Schema create(@RequestBody Schema schema) {
         for (Property property : schema.getProperties()) {
-            property.setEntity(schema.getEntity());
+            property.setTitle(schema.getTitle());
             schemaService.save(property);
         }
         return schema;
