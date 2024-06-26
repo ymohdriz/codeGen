@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @IdClass(PropertyId.class)
 public class Property {
+
+    private long id;
     @Id
     private String name;
 
