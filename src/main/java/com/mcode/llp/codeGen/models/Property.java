@@ -3,20 +3,22 @@ package com.mcode.llp.codeGen.models;
 import jakarta.persistence.*;
 
 @Entity
+@IdClass(PropertyId.class)
 public class Property {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String name;
-    private String type;
-    private String title;
 
-    public String getTitle() {
-        return title;
+    private String type;
+    @Id
+    private String entity;
+
+    // Getters and setters
+    public String getEntity() {
+        return entity;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEntity(String entity) {
+        this.entity = entity;
     }
 
     public String getName() {
@@ -35,9 +37,3 @@ public class Property {
         this.type = type;
     }
 }
-
-
-
-
-
-
