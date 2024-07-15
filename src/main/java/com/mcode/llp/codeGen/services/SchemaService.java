@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
+//import java.util.Optional;
 @Service
 public class SchemaService {
 
@@ -19,13 +17,12 @@ public class SchemaService {
         return schemaRepository.save(schemas);
     }
 
-    public List<Property> getAll() {
+    public List<Property> getAll(String entityName) {
         return schemaRepository.findAll();
     }
 
-    public Optional<Property> findById(Long id) {
-        return schemaRepository.findById(id);
+
+    public List<Property> getByName(String entityName) {
+        return schemaRepository.findByEntityName(entityName);
     }
-
-
 }

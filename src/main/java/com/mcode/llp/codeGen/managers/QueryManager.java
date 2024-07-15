@@ -2,8 +2,6 @@ package com.mcode.llp.codeGen.managers;
 
 import com.mcode.llp.codeGen.databases.GenDAO;
 import com.mcode.llp.codeGen.models.Property;
-import com.mcode.llp.codeGen.models.PropertyId;
-import com.mcode.llp.codeGen.models.Schema;
 import com.mcode.llp.codeGen.services.SchemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class QueryManager {
 
     public void createTable(String entityName) {
         // Fetch all properties
-        List<Property> properties = schemaService.getAll();
+        List<Property> properties = schemaService.getAll(entityName);
         StringBuilder createTableSQL = new StringBuilder("CREATE TABLE IF NOT EXISTS ")
                 .append(entityName)
                 .append(" (id SERIAL PRIMARY KEY");
@@ -96,7 +94,7 @@ public class QueryManager {
 
 
     public List<Map<String, Object>> viewAllData(String entityName) {
-        String viewData = "SELECT * FROM " + entityName;
+        String viewData = "SELECT NAME , TYPE  FROM " + entityName;
         return genDAO.viewAllData(viewData);
     }
 }
