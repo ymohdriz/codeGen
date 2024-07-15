@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public @Repository  interface SchemaDAO extends JpaRepository<Property, Long> {
-    @Query(value = "SELECT *  FROM property WHERE entity = :students", nativeQuery = true)
-    List<Property> findByEntityName(@Param("students") String students);
+    @Query(value = "SELECT *  FROM property WHERE entity = :entityname", nativeQuery = true)
+    List<Property> findByEntityName(@Param("entityname") String entityname);
 
 
 }
