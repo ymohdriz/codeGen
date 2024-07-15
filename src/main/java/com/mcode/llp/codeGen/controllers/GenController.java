@@ -85,4 +85,8 @@ public class GenController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+//    @PutMapping("/{entityName}/{id}")
+//    public void updateEntity(@PathVariable String entityName, @PathVariable String id, @RequestBody Map<String, Object> updates) {
+//        queryManager.updateTable(entityName, id , updates);
+//    }
 }
