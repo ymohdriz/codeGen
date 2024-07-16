@@ -1,7 +1,10 @@
 package com.mcode.llp.codeGen.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @IdClass(PropertyId.class)
 public class Property {
