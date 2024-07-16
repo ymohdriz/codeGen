@@ -30,10 +30,16 @@ public class SchemaController {
 
 
 @GetMapping("/schemas/{entityName}")
-    public ResponseEntity<List<Property>> getbyName(@PathVariable(value = "entityName") String entityName) {
+    public ResponseEntity<Schema> getbyName(@PathVariable(value = "entityName") String entityName) {
         List<Property> properties = schemaService.getByName(entityName);
         if (properties != null && !properties.isEmpty()) {
-            return ResponseEntity.ok(properties);
+            Schema schema = new Schema();
+            for (Property property : properties) {
+                schema.setEntity(property.getEntity());
+                property.setEntity(null);
+            }
+            schema.setProperties(properties);
+            return  ResponseEntity.ok(schema);
         } else {
             return ResponseEntity.notFound().build();
         }
