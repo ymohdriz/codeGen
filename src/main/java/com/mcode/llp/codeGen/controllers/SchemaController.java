@@ -19,17 +19,17 @@ public class SchemaController {
     private SchemaService schemaService;
     @PostMapping("/schemas")
     public Schema create(@RequestBody Schema schema) {
-        for (Property property : schema.getProperties()) {
-            property.setEntity(schema.getEntity());
+        for (Map.Entry<String, Schema> eachSchema : schema.getProperties().entrySet()) {
+            Property property = new Property();
+            property.setEntity(schema.getTitle());
+            property.setName(eachSchema.getKey());
+            property.setType(eachSchema.getValue().getType());
             schemaService.save(property);
         }
         return schema;
     }
 
-
-
-
-@GetMapping("/schemas/{entityName}")
+/*@GetMapping("/schemas/{entityName}")
     public ResponseEntity<Schema> getbyName(@PathVariable(value = "entityName") String entityName) {
         List<Property> properties = schemaService.getByName(entityName);
         if (properties != null && !properties.isEmpty()) {
@@ -43,5 +43,5 @@ public class SchemaController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 }

@@ -5,30 +5,49 @@ import jakarta.persistence.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Schema {
-    String entity;
-
-    List<Property> properties = new ArrayList<>();
+    String title;
+    String type;
+    Map<String, Schema> properties = new HashMap<>();
+    List<String> required = new ArrayList<>();
 
     public Schema() {
     }
 
-    public String getEntity() {
-        return entity;
+    public String getTitle() {
+        return title;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public List<Property> getProperties() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Map<String, Schema> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<Property> properties) {
+    public void setProperties(Map<String, Schema> properties) {
         this.properties = properties;
+    }
+
+    public List<String> getRequired() {
+        return required;
+    }
+
+    public void setRequired(List<String> required) {
+        this.required = required;
     }
 }
