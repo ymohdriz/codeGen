@@ -5,13 +5,18 @@ import com.mcode.llp.codeGen.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 //import java.util.Optional;
 @Service
 public class SchemaService {
 
     @Autowired
     private  SchemaDAO schemaRepository;
+
 
     public Property save(Property schemas) {
         return schemaRepository.save(schemas);
@@ -21,8 +26,19 @@ public class SchemaService {
         return schemaRepository.findAll();
     }
 
-
     public List<Property> getByName(String entityName) {
         return schemaRepository.findByEntityName(entityName);
     }
+
+    public List<String> getAllEntityNames() {
+        List<Property> allProperties = schemaRepository.findAll();
+        Set<String> entityNames = new HashSet<>();
+
+        for (Property property : allProperties) {
+            entityNames.add(property.getEntity());
+        }
+
+        return new ArrayList<>(entityNames);
+    }
+
 }

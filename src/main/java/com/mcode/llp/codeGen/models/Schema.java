@@ -1,15 +1,13 @@
 package com.mcode.llp.codeGen.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Schema {
     String title;
     String type;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Entity
 @IdClass(PropertyId.class)
 public class Property {
@@ -16,6 +16,8 @@ public class Property {
     private String type;
     @Id
     private String entity;
+
+    private boolean required;
 
     // Getters and setters
     public String getEntity() {
@@ -40,5 +42,16 @@ public class Property {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    
+
+    public void setRequired(boolean required) {
+        this.required = required;
+
+    }
+
+    public boolean isRequired() {
+        return required;
     }
 }
