@@ -5,10 +5,7 @@ import com.mcode.llp.codeGen.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 //import java.util.Optional;
 @Service
@@ -30,7 +27,8 @@ public class SchemaService {
         return schemaRepository.findByEntityName(entityName);
     }
 
-    public List<String> getAllEntityNames() {
+    public List<String> getAllEntityNames(){return schemaRepository.getAllEntityNames();}
+    /* {
         List<Property> allProperties = schemaRepository.findAll();
         Set<String> entityNames = new HashSet<>();
 
@@ -39,6 +37,6 @@ public class SchemaService {
         }
 
         return new ArrayList<>(entityNames);
-    }
+    }*/
 
 }

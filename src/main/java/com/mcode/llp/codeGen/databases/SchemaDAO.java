@@ -12,6 +12,9 @@ public @Repository  interface SchemaDAO extends JpaRepository<Property, Long> {
     @Query(value = "SELECT *  FROM property WHERE entity = :entityname", nativeQuery = true)
     List<Property> findByEntityName(@Param("entityname") String entityname);
 
+    @Query(value = "SELECT DISTINCT entity FROM property", nativeQuery = true)
+    List<String> getAllEntityNames();
+
 }
 
 

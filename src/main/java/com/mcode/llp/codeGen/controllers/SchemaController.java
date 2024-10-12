@@ -40,7 +40,7 @@ public class SchemaController {
 
         Schema schema = new Schema();
         schema.setTitle(entityName);
-        schema.getTitle();
+
 
         List<Property> properties = schemaService.getByName(entityName);
         if (properties != null && !properties.isEmpty()) {
