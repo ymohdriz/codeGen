@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//import java.util.Optional;
+
 @Service
 public class SchemaService {
 
@@ -28,15 +28,6 @@ public class SchemaService {
     }
 
     public List<String> getAllEntityNames(){return schemaRepository.getAllEntityNames();}
-    /* {
-        List<Property> allProperties = schemaRepository.findAll();
-        Set<String> entityNames = new HashSet<>();
 
-        for (Property property : allProperties) {
-            entityNames.add(property.getEntity());
-        }
-
-        return new ArrayList<>(entityNames);
-    }*/
 
 }
