@@ -20,11 +20,21 @@ import java.util.*;
 
         @PostMapping("/schemas")
         public ResponseEntity<?> create(@RequestBody Schema schema) {
+            if (schema == null || schema.getProperties() == null || schema.getRequired() == null) {
+                logger.warn("Recived Null or Empty Schema Input");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: schema is null or empty");
+            }
+            if (schema.getProperties().isEmpty()) {
+                logger.warn("Properties field is empty");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: properties field is empty");
+            }
+
+            if (schema.getRequired().isEmpty()) {
+                logger.warn("Required field is empty");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: required field is empty");
+            }
+
             try {
-                if (schema == null || schema.getProperties() == null) {
-                    logger.warn("Recived Null or Empty Schema Input");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: schema is null or empty");
-                }
 
                 for (Map.Entry<String, Schema> eachSchema : schema.getProperties().entrySet()) {
                     Property property = new Property();
@@ -36,12 +46,11 @@ import java.util.*;
                     schemaService.save(property);
                 }
 
-                return ResponseEntity.ok(schema);
-
-            } catch (NullPointerException e) {
-                logger.error("NullPointerException occurred:", e.getMessage());
+            } catch (Exception e) {
+                logger.error("Error occurred:", e.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An unexpected error occurred");
             }
+            return ResponseEntity.ok(schema);
         }
 
 
@@ -53,11 +62,11 @@ import java.util.*;
             schema.setTitle(entityName);
 
 
-            List<Property> properties = schemaService.getByName(entityName);
+            Set<Property> properties = schemaService.getByName(entityName);
             if (properties != null && !properties.isEmpty()) {
 
                 Map<String, Schema> schemaProperties = new HashMap<>();
-                List<String> requiredFields = new ArrayList<>();
+                Set<String> requiredFields = new HashSet<>();
 
                 for (Property property : properties) {
 
@@ -92,7 +101,7 @@ import java.util.*;
                 Schema schema = new Schema();
                 schema.setTitle(entityName);
 
-                List<Property> properties = schemaService.getByName(entityName);
+                Set<Property> properties = schemaService.getByName(entityName);
 
                 if (properties != null && !properties.isEmpty()) {
                     Map<String, Schema> schemaProperties = new HashMap<>();
@@ -109,7 +118,7 @@ import java.util.*;
                     }
                     schema.setProperties(schemaProperties);
                     if (!requiredFields.isEmpty()) {
-                        schema.setRequired(new ArrayList<>(requiredFields));
+                        schema.setRequired((requiredFields));
                     }
                 }
 
