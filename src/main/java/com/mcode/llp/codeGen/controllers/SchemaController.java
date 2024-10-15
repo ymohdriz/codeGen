@@ -20,6 +20,7 @@ import java.util.*;
 
         @PostMapping("/schemas")
         public ResponseEntity<?> create(@RequestBody Schema schema) {
+
             if (schema == null || schema.getProperties() == null || schema.getRequired() == null) {
                 logger.warn("Recived Null or Empty Schema Input");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: schema is null or empty");
@@ -36,6 +37,12 @@ import java.util.*;
 
             try {
 
+                if (schema == null || schema.getProperties() == null) {
+                    logger.warn("Recived Null or Empty Schema Input");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: schema is null or empty");
+                }
+
+
                 for (Map.Entry<String, Schema> eachSchema : schema.getProperties().entrySet()) {
                     Property property = new Property();
                     property.setEntity(schema.getTitle());
@@ -46,11 +53,13 @@ import java.util.*;
                     schemaService.save(property);
                 }
 
+
             } catch (Exception e) {
                 logger.error("Error occurred:", e.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An unexpected error occurred");
             }
             return ResponseEntity.ok(schema);
+
         }
 
 
@@ -62,7 +71,11 @@ import java.util.*;
             schema.setTitle(entityName);
 
 
+
             Set<Property> properties = schemaService.getByName(entityName);
+
+
+
             if (properties != null && !properties.isEmpty()) {
 
                 Map<String, Schema> schemaProperties = new HashMap<>();
@@ -101,7 +114,10 @@ import java.util.*;
                 Schema schema = new Schema();
                 schema.setTitle(entityName);
 
+
                 Set<Property> properties = schemaService.getByName(entityName);
+
+
 
                 if (properties != null && !properties.isEmpty()) {
                     Map<String, Schema> schemaProperties = new HashMap<>();
@@ -118,7 +134,9 @@ import java.util.*;
                     }
                     schema.setProperties(schemaProperties);
                     if (!requiredFields.isEmpty()) {
+
                         schema.setRequired((requiredFields));
+
                     }
                 }
 
