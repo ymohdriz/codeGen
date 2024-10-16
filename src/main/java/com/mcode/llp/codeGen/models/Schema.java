@@ -1,20 +1,15 @@
 package com.mcode.llp.codeGen.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Schema {
     String title;
     String type;
     Map<String, Schema> properties = new HashMap<>();
-    List<String> required = new ArrayList<>();
+    Set<String> required = new HashSet<>();
 
     public Schema() {
     }
@@ -43,11 +38,11 @@ public class Schema {
         this.properties = properties;
     }
 
-    public List<String> getRequired() {
+    public Set<String> getRequired() {
         return required;
     }
 
-    public void setRequired(List<String> required) {
+    public void setRequired(Set<String> required) {
         this.required = required;
     }
 }

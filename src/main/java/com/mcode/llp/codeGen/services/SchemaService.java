@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-//import java.util.Optional;
+import java.util.Set;
+
+
+
 @Service
 public class SchemaService {
 
     @Autowired
     private  SchemaDAO schemaRepository;
+
 
     public Property save(Property schemas) {
         return schemaRepository.save(schemas);
@@ -21,8 +25,12 @@ public class SchemaService {
         return schemaRepository.findAll();
     }
 
-
-    public List<Property> getByName(String entityName) {
+    public Set<Property> getByName(String entityName) {
         return schemaRepository.findByEntityName(entityName);
     }
+
+
+    public List<String> getAllEntityNames(){return schemaRepository.getAllEntityNames();}
+
+
 }

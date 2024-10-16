@@ -22,7 +22,7 @@ public class QueryManager {
 
 
     public void createTable(String entityName) {
-        // Fetch all properties
+
         List<Property> properties = schemaService.getAll(entityName);
         StringBuilder createTableSQL = new StringBuilder("CREATE TABLE IF NOT EXISTS ")
                 .append(entityName)
